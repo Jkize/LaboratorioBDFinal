@@ -35,10 +35,10 @@ public class DAO_EvolucionVentas {
         }
     }
 
-       public List<EvolucionVentas> crearInforme(String año, String tienda) {
+       public List<EvolucionVentas> crearInforme(String ano, String tienda) {
         List<EvolucionVentas> infoMeses = new ArrayList<EvolucionVentas>();
 
-        String query = "SELECT  month(fecha) as mes, SUM(monto) as ventames FROM Venta WHERE year(fecha)=" + año + "  and idSM='" + tienda + "' GROUP  BY (month(fecha)) ORDER BY month(fecha) ASC";
+        String query = "SELECT  month(fecha) as mes, SUM(monto) as ventames FROM Venta WHERE year(fecha)=" + ano + "  and idSM='" + tienda + "' GROUP  BY (month(fecha)) ORDER BY month(fecha) ASC";
         try {
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery(query); 

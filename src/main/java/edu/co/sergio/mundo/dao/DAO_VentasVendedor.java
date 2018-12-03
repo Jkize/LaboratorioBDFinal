@@ -28,10 +28,10 @@ public class DAO_VentasVendedor {
         conexion = Conexion.getConnection();
     }
 
-   public List<VentasVendedor> crearInforme(String mes, String año, String tienda) {
+   public List<VentasVendedor> crearInforme(String mes, String ano, String tienda) {
         List<VentasVendedor> infoVends = new ArrayList<VentasVendedor>();
-        String query = "SELECT idVendedor,SUM(Monto) FROM Venta WHERE year(fecha)=" + año + " and month(fecha)=" + mes + " and idSM='" + tienda + "'GROUP BY(idVendedor)";
-        String query1 = "SELECT SUM(Monto) FROM Venta WHERE year(fecha)=" + año + " and month(fecha)=" + mes + " and idSM='" + tienda + "'";
+        String query = "SELECT idVendedor,SUM(Monto) FROM Venta WHERE year(fecha)=" + ano + " and month(fecha)=" + mes + " and idSM='" + tienda + "'GROUP BY(idVendedor)";
+        String query1 = "SELECT SUM(Monto) FROM Venta WHERE year(fecha)=" + ano + " and month(fecha)=" + mes + " and idSM='" + tienda + "'";
         try {
             Statement st1 = conexion.createStatement();
             ResultSet rs1 = st1.executeQuery(query1);
