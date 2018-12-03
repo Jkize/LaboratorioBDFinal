@@ -142,21 +142,21 @@ public class ServletEmpleado extends HttpServlet {
                     daoDet.addAll(arrayDe, lastVenta);
                     ob.put("Correcto", "correctamente");
                     out.println(ob);
-                }else{
-                     System.out.println("no se creo la venta");
+                } else {
+                    System.out.println("{\"error\":\"De la base de datos\"}");
                 }
                 out.println(ob);
             } catch (JSONException ex) {
-                 System.out.println(ex.toString());
+                System.out.println(ex.toString());
                 ex.printStackTrace();
             } catch (SQLException ex) {
                 System.out.println(ex.toString());
                 Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                 System.out.println(ex.toString());
+                System.out.println(ex.toString());
                 Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             } catch (URISyntaxException ex) {
-                 System.out.println(ex.toString());
+                System.out.println(ex.toString());
                 Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

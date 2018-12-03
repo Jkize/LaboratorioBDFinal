@@ -17,7 +17,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    
+
 
     <head>
 
@@ -336,6 +336,7 @@
                     var fc;
                     var pago = parseFloat($('#Pago').val());
 
+
                     var dat = {
                         IdCliente: document.getElementById("IdCliente").value,
                         nameCliente: document.getElementById("nameCliente").value,
@@ -350,18 +351,25 @@
 
                     var Bliquidar = $('#liquidar').val();
 
-                    $.post('ServletEmpleado', {
-                        Datos: JSON.stringify(dat),
-                        Detalle: JSON.stringify(array),
-                        liquidar: Bliquidar,
-                        Pago: pago
-                    }, function (responseText) {
-                        fc = JSON.parse(responseText);
-                        if (typeof fc.error === "undefined") {
-                            alert(fc.Correcto);
-                            document.getElementById("Cambio").value = pago-dat.TotalPagar;
-                        }
-                    });
+                    if (pago >= dat.TotalPagar) {
+
+                        $.post('ServletEmpleado', {
+                            Datos: JSON.stringify(dat),
+                            Detalle: JSON.stringify(array),
+                            liquidar: Bliquidar,
+                            Pago: pago
+                        }, function (responseText) {
+                            fc = JSON.parse(responseText);
+                            if (typeof fc.error === "undefined") {
+                                alert(fc.Correcto);
+                                document.getElementById("Cambio").value = pago - dat.TotalPagar;
+                            }else{
+                                alertify.error(fc.error);
+                            }
+                        });
+                    } else {
+                        alertify.warning("El pago es menor al Total pagar");
+                    }
                 });
             }
             );
@@ -401,8 +409,8 @@
                                     array.push(datos);
                                     //alert(array.toString2());
                                     mostratTabla();
-                                }else{
-                                     alertify.error(fc.error);
+                                } else {
+                                    alertify.error(fc.error);
                                 }
                             });
                         } else {
@@ -411,8 +419,8 @@
                             dat2.total += datos.cantidad * dat2.precio;
                             mostratTabla();
                         }
-                    }else{
-                         alertify.warning("Para un mejor procesamiento Cantidad debe ser entero");
+                    } else {
+                        alertify.warning("Para un mejor procesamiento Cantidad debe ser entero");
                     }
 
                 });
@@ -645,7 +653,7 @@
             <div class="modal-body">Selecciona "Salir" si estas seguro de cerrar sesión.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-primary" href="ServletIndex?idEmpleado=<%=emp.getIdPersona()%>">Salir</a>
+                <a class="btn btn-primary" href="ServletIndex?idEmpleado=<%=emp.getIdPersona()%>">Salir</a>
             </div>
         </div>
     </div>

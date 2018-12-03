@@ -67,7 +67,7 @@ public class DAO_Inventario {
                 prosuper = new Inventario(idProSuper, rs.getInt("cantidad"), rs.getDouble("precio"), dao_prod.Buscar(rs.getString("idProducto")), dao_super.buscar(rs.getString("idSM")));
             }
             if (prosuper != null) {
-                query = "SELECT nombre FROM Producto WHERE codigoBarras=" + prosuper.getProducto().getCodigoBarras();
+                query = "SELECT nombre FROM Producto WHERE codigoBarras= '"+prosuper.getProducto().getCodigoBarras()+"'";
                 rs = st.executeQuery(query);
                 while (rs.next()) {
                     prosuper.getProducto().setNombreProducto(rs.getString("nombre"));
