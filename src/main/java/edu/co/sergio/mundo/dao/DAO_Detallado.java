@@ -34,7 +34,7 @@ public class DAO_Detallado {
      * @throws SQLException .
      * @throws java.lang.ClassNotFoundException
      */
-    public void addAll(List<Inventario> detallado, int idVenta) throws SQLException, ClassNotFoundException {
+    public void addAll(List<Inventario> detallado, int idVenta) throws SQLException, ClassNotFoundException, URISyntaxException {
        
         for (Inventario det : detallado) {
             String query = " insert into Detallado (idVenta,idProd,cantidadProd)" + " values (?,?,?)";
