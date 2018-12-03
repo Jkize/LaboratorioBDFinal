@@ -115,6 +115,7 @@ public class ServletEmpleado extends HttpServlet {
         String Bliquidar = request.getParameter("liquidar");
         String Pago = request.getParameter("Pago");
 
+        String caja = request.getParameter("caja");
         JSONObject ob = new JSONObject();
 
         if (Bliquidar != null && JsonDatos != null && ArrayDetalles != null && Pago != null) {
@@ -141,12 +142,18 @@ public class ServletEmpleado extends HttpServlet {
                     }
                     daoDet.addAll(arrayDe, lastVenta);
                     ob.put("Correcto", "correctamente");
+                    DAO_Caja daoCaja = new DAO_Caja();
+                    Caja cajita = daoCaja.buscar(datos.getString("IdCaja"), datos.getString("IdSup"));
+                    cajita.setMontoActual(cajita.getMontoActual() + datos.getFloat("TotalPagar"));
+                    daoCaja.actualizarMonto(cajita, datos.getString("IdSup"));
+                    ob.put("CajaActual", cajita.getMontoActual());
+
                 } else {
                     ob.put("error", "De la base de datos");
                 }
                 out.println(ob);
             } catch (JSONException ex) {
-                out.println("{\"error\":\""+ex.toString()+"\"}");
+                out.println("{\"error\":\"" + ex.toString() + "\"}");
                 System.out.println(ex.toString());
                 ex.printStackTrace();
             } catch (SQLException ex) {

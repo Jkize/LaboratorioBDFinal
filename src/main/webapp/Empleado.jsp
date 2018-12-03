@@ -363,8 +363,10 @@
                             if (typeof fc.error === "undefined") {
                                 alertify.success('Liquidación completa');
                                 document.getElementById("Cambio").value = pago - dat.TotalPagar;
-                                document.getElementById("imprimir").disabled = "false";
-                                document.getElementById("liquidar").disabled = "true";
+                                document.getElementById("imprimir").disabled = false;
+                                document.getElementById("liquidar").disabled = true;
+                                document.getElementById("ActualCaja").value=fc.CajaActual;
+                                
                             } else {
                                 alertify.error(fc.error);
                             }
@@ -380,8 +382,9 @@
 
             $(document).ready(function () {
                 $('#imprimir').click(function (event) {
-                    document.getElementById("liquidar").disabled = "false";
-                    document.getElementById("imprimir").disabled = "true";
+                    document.getElementById("liquidar").disabled = false;
+                    document.getElementById("imprimir").disabled = true;
+                    document.getElementById("Cambio").value = "";
                     array = new Array();
                     mostratTabla();
                 });
@@ -611,7 +614,7 @@
 
             var jsonn = JSON.parse(<%=hola.toString()%>);
 
-            document.getElementById("imprimir").disabled = "true";
+            document.getElementById("imprimir").disabled = true;
 
             $(document).ready(function () {
                 $('#Tabla1').DataTable({
