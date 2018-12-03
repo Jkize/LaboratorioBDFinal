@@ -141,12 +141,12 @@ public class ServletEmpleado extends HttpServlet {
                     }
                     daoDet.addAll(arrayDe, lastVenta);
                     ob.put("Correcto", "correctamente");
-                    out.println(ob);
                 } else {
-                    System.out.println("{\"error\":\"De la base de datos\"}");
+                    ob.put("error", "De la base de datos");
                 }
                 out.println(ob);
             } catch (JSONException ex) {
+                out.println("{\"error\":\""+ex.toString()+"\"}");
                 System.out.println(ex.toString());
                 ex.printStackTrace();
             } catch (SQLException ex) {

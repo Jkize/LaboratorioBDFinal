@@ -361,7 +361,7 @@
                         }, function (responseText) {
                             fc = JSON.parse(responseText);
                             if (typeof fc.error === "undefined") {
-                                alert(fc.Correcto);
+                                alertify.success('Liquidación completa');
                                 document.getElementById("Cambio").value = pago - dat.TotalPagar;
                                 document.getElementById("imprimir").disabled = "false";
                                 document.getElementById("liquidar").disabled = "true";
