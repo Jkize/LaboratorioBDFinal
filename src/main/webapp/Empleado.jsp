@@ -363,13 +363,27 @@
                             if (typeof fc.error === "undefined") {
                                 alert(fc.Correcto);
                                 document.getElementById("Cambio").value = pago - dat.TotalPagar;
-                            }else{
+                                document.getElementById("imprimir").disabled = "false";
+                                document.getElementById("liquidar").disabled = "true";
+                            } else {
                                 alertify.error(fc.error);
                             }
                         });
                     } else {
                         alertify.warning("El pago es menor al Total pagar");
                     }
+                });
+            }
+            );
+
+
+
+            $(document).ready(function () {
+                $('#imprimir').click(function (event) {
+                    document.getElementById("liquidar").disabled = "false";
+                    document.getElementById("imprimir").disabled = "true";
+                    array = new Array();
+                    mostratTabla();
                 });
             }
             );
