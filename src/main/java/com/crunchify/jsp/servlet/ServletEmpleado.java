@@ -118,53 +118,60 @@ public class ServletEmpleado extends HttpServlet {
         String caja = request.getParameter("caja");
         JSONObject ob = new JSONObject();
 
-        if (Bliquidar != null && JsonDatos != null && ArrayDetalles != null && Pago != null) {
+        if (Bliquidar != null) {
 
-            try {
-                JSONObject datos = new JSONObject(JsonDatos);
-                JSONArray detalles = new JSONArray(ArrayDetalles);
-                DAO_Venta daoVenta = new DAO_Venta();
-                DAO_Detallado daoDet = new DAO_Detallado();
-                Venta venta = new Venta(new Empleado(datos.getLong("IdVendedor")), new Supermercado(datos.getString("IdSup")), new Cliente(datos.getLong("IdCliente")), new Date(datos.getLong("date")), datos.getDouble("TotalPagar"));
+            if (JsonDatos.length() > 5 && ArrayDetalles.length() > 5 && Pago.length() > 0) {
 
-                ArrayList<Inventario> arrayDe = new ArrayList<Inventario>();
+                try {
+                    JSONObject datos = new JSONObject(JsonDatos);
+                    JSONArray detalles = new JSONArray(ArrayDetalles);
+                    DAO_Venta daoVenta = new DAO_Venta();
+                    DAO_Detallado daoDet = new DAO_Detallado();
+                    Venta venta = new Venta(new Empleado(datos.getLong("IdVendedor")), new Supermercado(datos.getString("IdSup")), new Cliente(datos.getLong("IdCliente")), new Date(datos.getLong("date")), datos.getDouble("TotalPagar"));
 
-                if (daoVenta.crear(venta)) {
-                    System.out.println("entra");
-                    int lastVenta = daoVenta.obtLastVenta();
-                    for (int i = 0; i < detalles.length(); i++) {
-                        JSONObject d = detalles.getJSONObject(i);
-                        Inventario inv = new Inventario();
-                        inv.setProducto(new Producto(d.getString("Id")));
-                        inv.setCantidad(d.getInt("cantidad"));
-                        inv.setSupermercado(new Supermercado(datos.getString("IdSup")));
-                        arrayDe.add(inv);
+                    ArrayList<Inventario> arrayDe = new ArrayList<Inventario>();
+
+                    if (daoVenta.crear(venta)) {
+                        System.out.println("entra");
+                        int lastVenta = daoVenta.obtLastVenta();
+                        for (int i = 0; i < detalles.length(); i++) {
+                            JSONObject d = detalles.getJSONObject(i);
+                            Inventario inv = new Inventario();
+                            inv.setProducto(new Producto(d.getString("Id")));
+                            inv.setCantidad(d.getInt("cantidad"));
+                            inv.setSupermercado(new Supermercado(datos.getString("IdSup")));
+                            arrayDe.add(inv);
+                        }
+                        daoDet.addAll(arrayDe, lastVenta);
+                        ob.put("Correcto", "correctamente");
+                        DAO_Caja daoCaja = new DAO_Caja();
+                        Caja cajita = daoCaja.buscar(datos.getString("IdCaja"), datos.getString("IdSup"));
+                        cajita.setMontoActual(cajita.getMontoActual() + datos.getFloat("TotalPagar"));
+                        daoCaja.actualizarMonto(cajita, datos.getString("IdSup"));
+                        ob.put("CajaActual", cajita.getMontoActual());
+
+                    } else {
+                        ob.put("error", "De la base de datos");
                     }
-                    daoDet.addAll(arrayDe, lastVenta);
-                    ob.put("Correcto", "correctamente");
-                    DAO_Caja daoCaja = new DAO_Caja();
-                    Caja cajita = daoCaja.buscar(datos.getString("IdCaja"), datos.getString("IdSup"));
-                    cajita.setMontoActual(cajita.getMontoActual() + datos.getFloat("TotalPagar"));
-                    daoCaja.actualizarMonto(cajita, datos.getString("IdSup"));
-                    ob.put("CajaActual", cajita.getMontoActual());
-
-                } else {
-                    ob.put("error", "De la base de datos");
+                    out.println(ob);
+                } catch (JSONException ex) {
+                    out.println("{\"error\":\"" + ex.toString() + "\"}");
+                    System.out.println(ex.toString());
+                    ex.printStackTrace();
+                } catch (SQLException ex) {
+                    System.out.println(ex.toString());
+                    Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    System.out.println(ex.toString());
+                    Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (URISyntaxException ex) {
+                    System.out.println(ex.toString());
+                    Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                out.println(ob);
-            } catch (JSONException ex) {
-                out.println("{\"error\":\"" + ex.toString() + "\"}");
-                System.out.println(ex.toString());
-                ex.printStackTrace();
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
-                Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                System.out.println(ex.toString());
-                Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (URISyntaxException ex) {
-                System.out.println(ex.toString());
-                Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+
+            } else {
+                out.println("{\"error\":\"Datos Vacios (Carrito)o Pago\"}");
+                
             }
         }
 
