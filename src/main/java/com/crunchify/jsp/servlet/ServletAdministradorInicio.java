@@ -54,6 +54,7 @@ public class ServletAdministradorInicio extends HttpServlet {
                 DAO_Empleado daoEmp = new DAO_Empleado();
                 Empleado emp = daoEmp.Buscar(id, request.getParameter("idSM"));
 
+                
                 if (emp != null) {
                     request.setAttribute("inicio", "{" + emp.toString() + "}");
                     rq.forward(request, response);

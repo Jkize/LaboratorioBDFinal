@@ -27,7 +27,7 @@ public class DAO_Venta {
 
     public boolean crear(Venta venta) throws SQLException {
         boolean result = false;
-        String query = " insert into Venta (fecha,monto,idCliente,idVendedor,idSM)" + " values (?,?,?,?,?)";
+        String query = "insert into Venta (fecha,monto,idCliente,idVendedor,idSM)" + " values (?,?,?,?,?)";
         PreparedStatement preparedStmt=null;
         try {
             preparedStmt = connection.prepareStatement(query);

@@ -81,7 +81,16 @@
     </servlet-mapping>
     
     
-    
+    <servlet>
+        <servlet-name>ServletAdministradorInicio</servlet-name>
+        <servlet-class>com.crunchify.jsp.servlet.ServletAdministradorInicio</servlet-class>
+       
+    </servlet>
+   
+    <servlet-mapping>
+        <servlet-name>ServletAdministradorInicio</servlet-name>
+        <url-pattern>/ServletAdministradorInicio</url-pattern>
+    </servlet-mapping>
    
     
     

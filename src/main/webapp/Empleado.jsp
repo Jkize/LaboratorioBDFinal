@@ -359,7 +359,7 @@
                         fc = JSON.parse(responseText);
                         if (typeof fc.error === "undefined") {
                             alert(fc.Correcto);
-                            document.getElementById("Cambio").value = dat.TotalPagar - pago;
+                            document.getElementById("Cambio").value = pago-dat.TotalPagar;
                         }
                     });
                 });

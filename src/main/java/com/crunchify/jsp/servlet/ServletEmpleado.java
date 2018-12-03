@@ -129,6 +129,7 @@ public class ServletEmpleado extends HttpServlet {
                 ArrayList<Inventario> arrayDe = new ArrayList<Inventario>();
 
                 if (daoVenta.crear(venta)) {
+                    System.out.println("entra");
                     int lastVenta = daoVenta.obtLastVenta();
                     for (int i = 0; i < detalles.length(); i++) {
                         JSONObject d = detalles.getJSONObject(i);
@@ -141,15 +142,21 @@ public class ServletEmpleado extends HttpServlet {
                     daoDet.addAll(arrayDe, lastVenta);
                     ob.put("Correcto", "correctamente");
                     out.println(ob);
+                }else{
+                     System.out.println("no se creo la venta");
                 }
- out.println(ob);
+                out.println(ob);
             } catch (JSONException ex) {
+                 System.out.println(ex.toString());
                 ex.printStackTrace();
             } catch (SQLException ex) {
+                System.out.println(ex.toString());
                 Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
+                 System.out.println(ex.toString());
                 Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             } catch (URISyntaxException ex) {
+                 System.out.println(ex.toString());
                 Logger.getLogger(ServletEmpleado.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -194,8 +201,8 @@ public class ServletEmpleado extends HttpServlet {
                     cliente.setDireccion(direCliente);
                     if (!daoCliente.actualizar(cliente)) {
                         ob.put("error", "No se encontró el Cliente");
-                    } 
-                     out.println(ob);
+                    }
+                    out.println(ob);
                 } catch (SQLException ex) {
                     out.println("{ \"error\": \"Error SQL\"}");
                 } catch (ClassNotFoundException ex) {
