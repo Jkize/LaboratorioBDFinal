@@ -365,8 +365,8 @@
                                 document.getElementById("Cambio").value = pago - dat.TotalPagar;
                                 document.getElementById("imprimir").disabled = false;
                                 document.getElementById("liquidar").disabled = true;
-                                document.getElementById("ActualCaja").value=fc.CajaActual;
-                                
+                                document.getElementById("ActualCaja").value = fc.CajaActual;
+
                             } else {
                                 alertify.error(fc.error);
                             }
@@ -385,6 +385,14 @@
                     document.getElementById("liquidar").disabled = false;
                     document.getElementById("imprimir").disabled = true;
                     document.getElementById("Cambio").value = "";
+                    document.getElementById("Pago").value = "";
+                    document.getElementById("IdProducto").value = "";
+                    document.getElementById("Cantidad").value = "";
+                    document.getElementById("IdCliente").value="";
+                    document.getElementById("Cdireccion").value="";
+                    document.getElementById("nameCliente").value="";
+
+
                     array = new Array();
                     mostratTabla();
                 });
