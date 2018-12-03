@@ -1,39 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-    version="3.0">
+         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
     <display-name>CrunchifyJSPServletExample</display-name>
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-        <welcome-file>index.htm</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
-        <welcome-file>default.html</welcome-file>
-        <welcome-file>default.htm</welcome-file>
+    
+        <welcome-file>index.jsp</welcome-file>     
         <welcome-file>default.jsp</welcome-file>
         <welcome-file>practica.jsp</welcome-file>
+        
+        <welcome-file>AdministradorInformes.jsp</welcome-file>
+        <welcome-file>AdministradorInicio.jsp</welcome-file>
+         
+        <welcome-file>AdministradorInventario.jsp</welcome-file>
+        <welcome-file>AdministradorRegistroCaja.jsp</welcome-file>
+        <welcome-file>AdministradorRegistroEmpleado.jsp</welcome-file>
+         
+        <welcome-file>Empleado.jsp</welcome-file>
+         
     </welcome-file-list>
        
+   
+    
     <servlet>
-        <servlet-name>Escuela</servlet-name>
-        <servlet-class>com.crunchify.jsp.servlet.ServletEscuela</servlet-class>
-    </servlet>
-    
- 
-    <servlet-mapping>
-        <servlet-name>Escuela</servlet-name>
-        <url-pattern>/Escuela</url-pattern>
-    </servlet-mapping>
-    
-       <servlet>
-        <servlet-name>Repaso</servlet-name>
-        <servlet-class>com.crunchify.jsp.servlet.ServletPractica</servlet-class>
+        <servlet-name>ServletAdministradorInventario</servlet-name>
+        <servlet-class>com.crunchify.jsp.servlet.ServletAdministradorInventario</servlet-class>
        
     </servlet>
-    
+   
     <servlet-mapping>
-        <servlet-name>Repaso</servlet-name>
-        <url-pattern>/Repaso</url-pattern>
+        <servlet-name>ServletAdministradorInventario</servlet-name>
+        <url-pattern>/ServletAdministradorInventario</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ServletAdministradorRegistroCaja</servlet-name>
+        <servlet-class>com.crunchify.jsp.servlet.ServletAdministradorRegistroCaja</servlet-class>
+       
+    </servlet>
+   
+    <servlet-mapping>
+        <servlet-name>ServletAdministradorRegistroCaja</servlet-name>
+        <url-pattern>/ServletAdministradorRegistroCaja</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ServletAdministradorRegistroEmpleado</servlet-name>
+        <servlet-class>com.crunchify.jsp.servlet.ServletAdministradorRegistroEmpleado</servlet-class>
+       
+    </servlet>
+   
+    <servlet-mapping>
+        <servlet-name>ServletAdministradorRegistroEmpleado</servlet-name>
+        <url-pattern>/ServletAdministradorRegistroEmpleado</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ServletEmpleado</servlet-name>
+        <servlet-class>com.crunchify.jsp.servlet.ServletEmpleado</servlet-class>
+       
+    </servlet>
+   
+    <servlet-mapping>
+        <servlet-name>ServletEmpleado</servlet-name>
+        <url-pattern>/ServletEmpleado</url-pattern>
+    </servlet-mapping>
+    
+      <servlet>
+        <servlet-name>ServletIndex</servlet-name>
+        <servlet-class>com.crunchify.jsp.servlet.ServletIndex</servlet-class>
+       
+    </servlet>
+   
+    <servlet-mapping>
+        <servlet-name>ServletIndex</servlet-name>
+        <url-pattern>/ServletIndex</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+   
+    
+    
 
 </web-app>

@@ -1,84 +1,100 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="edu.co.sergio.mundo.vo.*"%>
-<%@ page import="java.util.List" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-    "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<style type="text/css">
-body {
-    background-image:
-        url('http://cdn.crunchify.com/wp-content/uploads/2013/03/Crunchify.bg_.300.png');
-}
-</style>
- 
+<%-- 
+    Document   : index
+    Created on : 4/11/2018, 08:15:21 PM
+    Author     : Sebastian--
+--%>-
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Estudiantes</title>
+        <title>Slamena Market</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!--===============================================================================================-->
     </head>
     <body>
-        <div align="center" style="margin-top: 50px;">
-            <%
-              if(request.getAttribute("escuelas")!=null){
-            %>   
-            <form action="Escuela" method="post">
-                <select name = "escuela">
-           <%
-              List<Escuela> escuelas  = (List<Escuela>)request.getAttribute("escuelas");  
-               for (Escuela escuela : escuelas) {
-             %>
-               <option value="<%=escuela.getCodigo()%>"><%=escuela.getNombre()%></option>
-             
-             <%
-               }
-           %>
-                </select>
-                <input type="submit" value="submit">
-            </form>
-            <%
-              }
-            
-            %>
-            
-          
+
+
+        <div class="limiter">
+            <div class="container-login100">
+
+                <div class="wrap-login100">
+
+                    <div class="login100-pic js-tilt" data-tilt>
+                        <img src="images/img-01.png" alt="IMG">
+                    </div>
+
+                    <form action="ServletIndex" class="login100-form" method="POST">
+                        <span style="color: white"class="login100-form-title">
+                            EMPLEADOS
+                        </span>
+                        <%
+                            if(request.getAttribute("error")!=null){
+                            %>
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> Los datos que ingresó no son válidos
+                        </div>
+                        <%}%>
+                        <div class="wrap-input100">
+                            <input name="usuario" class="input100" type="text" placeholder="Usuario">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100">
+                            <input name="pass" class="input100" type="password" placeholder="Clave">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button style="background-color: #343a40" class="login100-form-btn">
+                                Iniciar Sesión
+                            </button>
+                        </div>
+
+                        <div class="text-center p-t-12">
+
+                        </div>
+
+                        <div class="text-center p-t-136">
+
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
 
 
-        <div align="center" style="margin-top: 50px;">
-            
-            <%
-              if(request.getAttribute("estudiantes")!=null){
-            %>      
-              <table style="width:100%">
-               <tr>
-                    <th>Codigo</th>
-                    <th>Nombre</th> 
-                    <th>Escuela</th>
-              </tr>
-                
-              <%
-              List<Estudiante> estudiantes  = (List<Estudiante>)request.getAttribute("estudiantes");  
-               for (Estudiante estudiante : estudiantes) {
-             %>
-             
-               <tr>
-                  <td><%=estudiante.getCodigo()%></td>
-                  <td><%=estudiante.getNombre()%></td> 
-                  <td><%=estudiante.getEscuela()%></td>
-              </tr>
-             
-             <%
-             }
-             %>
-               
-                </table>
-               
-            <%
-              }
-            %>   
-            
-        </div>
-    
-    
-</body>
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendor/tilt/tilt.jquery.min.js"></script>
+
+        <script >
+            $('.js-tilt').tilt({
+                scale: 1.1
+            });
+        </script>
+
+    </body>
 </html>
