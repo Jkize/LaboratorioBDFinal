@@ -37,7 +37,7 @@ public class DAO_Detallado {
     public void addAll(List<Inventario> detallado, int idVenta) throws SQLException, ClassNotFoundException, URISyntaxException {
        
         for (Inventario det : detallado) {
-            String query = " insert into Detallado (idVenta,idProd,cantidadProd)" + " values (?,?,?)";
+            String query = "insert into Detallado (idVenta,idProd,cantidadProd)" + " values (?,?,?)";
             PreparedStatement preparedStmt;
             try {
                 preparedStmt = connection.prepareStatement(query);
